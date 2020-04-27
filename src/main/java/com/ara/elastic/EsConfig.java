@@ -19,9 +19,6 @@ import java.net.UnknownHostException;
 @EnableElasticsearchRepositories
 public class EsConfig {
 
-    @Value("${elasticsearch.home:/usr/local/Cellar/elasticsearch/5.6.0}")
-    private String elasticsearchHome;
-
     @Value("${elasticsearch.cluster.name:elasticsearch}")
     private String clusterName;
 
@@ -33,11 +30,11 @@ public class EsConfig {
 
     @Bean
     public Client client() throws UnknownHostException {
-        Settings elasticsearchSettings = Settings.builder()
+        TransportClient client = new PreBuiltTransportClient(Settings.builder()
+                .put("cluster.name", clusterName)
+                .put("client.transport.ignore_cluster_name", true)
                 .put("client.transport.sniff", true)
-                .put("path.home", elasticsearchHome)
-                .put("cluster.name", clusterName).build();
-        TransportClient client = new PreBuiltTransportClient(elasticsearchSettings);
+                .build());
         client.addTransportAddress(new TransportAddress(InetAddress.getByName(elasticsearchHost), elasticsearchPort));
         return client;
     }

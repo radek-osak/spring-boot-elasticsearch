@@ -7,8 +7,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import java.util.Calendar;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,7 +19,5 @@ public class Post {
     private String title;
     private String content;
     private boolean isPublished;
-    private Calendar publishingDate;
-    private Calendar creationDate;
     private String author;
 }
