@@ -19,7 +19,7 @@ import java.net.UnknownHostException;
 @EnableElasticsearchRepositories
 public class EsConfig {
 
-    @Value("${elasticsearch.cluster.name:elasticsearch}")
+    @Value("${elasticsearch.cluster.name:docker-cluster}")
     private String clusterName;
 
     @Value("${elasticsearch.host}")
@@ -32,8 +32,6 @@ public class EsConfig {
     public Client client() throws UnknownHostException {
         TransportClient client = new PreBuiltTransportClient(Settings.builder()
                 .put("cluster.name", clusterName)
-                .put("client.transport.ignore_cluster_name", true)
-                .put("client.transport.sniff", true)
                 .build());
         client.addTransportAddress(new TransportAddress(InetAddress.getByName(elasticsearchHost), elasticsearchPort));
         return client;

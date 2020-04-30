@@ -10,6 +10,6 @@ public interface PostService {
     void delete(String postId);
 
     Post findById(String postId);
-    List<Post> findAll();
+    List findAll();
     List<Post> findAllByPhrase(String phrase);
 }
