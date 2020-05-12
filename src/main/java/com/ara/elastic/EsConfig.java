@@ -19,7 +19,7 @@ import java.net.UnknownHostException;
 @EnableElasticsearchRepositories
 public class EsConfig {
 
-    @Value("${elasticsearch.cluster.name:docker-cluster}")
+    @Value("${elasticsearch.cluster.name}")
     private String clusterName;
 
     @Value("${elasticsearch.host}")
